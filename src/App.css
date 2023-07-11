@@ -3,3 +3,42 @@
 * {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
+
+.loader .stroke {
+  @apply block relative bg-slate-800 h-full w-16 rounded-full mx-10 opacity-20;
+}
+
+.loader .stroke.animate-music {
+  animation: music 1s linear infinite;
+}
+
+@keyframes music {
+  50%  {
+    height: 20%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.stroke.animate-music:nth-child(1) {
+  animation-delay: 0s;
+}
+.stroke.animate-music:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.stroke.animate-music:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.stroke.animate-music:nth-child(4) {
+  animation-delay: 0.9s;
+}
+.stroke.animate-music:nth-child(5) {
+  animation-delay: 0.6s;
+}
+.stroke.animate-music:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.stroke.animate-music:nth-child(7) {
+  animation-delay: 0s;
+}

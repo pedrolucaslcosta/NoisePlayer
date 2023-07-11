@@ -7,6 +7,7 @@ import { PauseIcon, PlayCircle, WavesIcon } from 'lucide-react';
 function App() {
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isAnimateMusic, setIsAnimateMusic] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [frequency, setFrequency] = useState(500);
   const [noise, setNoise] = useState(null);
@@ -47,6 +48,8 @@ function App() {
       noise.stop();
     }
     setIsPlaying(!isPlaying);
+    
+    setIsAnimateMusic(!isAnimateMusic);
   };
 
   const handleVolumeChange = (e) => {
@@ -67,7 +70,20 @@ function App() {
 
   return (
     <>
-    <div className='bg-slate-900 mouse-effect text-neutral-100 h-screen w-screen flex justify-center items-center flex-col gap-4'> 
+    <div className="h-screen w-screen absolute flex items-center justify-center">
+      <div id="music-animation" className="loader flex items-center justify-center h-3/4 w-full">
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
+      </div>
+    </div>
+    
+    <div className='bg-slate-900 mouse-effect z-50 text-neutral-100 h-screen w-screen flex justify-center items-center flex-col gap-4'> 
+     
       <div className='p-6 bg-slate-800 rounded-lg z-50 flex flex-col gap-2 items-center font-medium'>
         <span className='flex gap-2'>
         <WavesIcon className='hover:text-cyan-500 hover:animate-spin'/> NoisePlayer
