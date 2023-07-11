@@ -42,3 +42,34 @@
 .stroke.animate-music:nth-child(7) {
   animation-delay: 0s;
 }
+
+input[type=range] {
+  @apply 
+  appearance-none 
+  bg-transparent
+  h-3
+  mx-3
+  my-0
+  w-full
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  @apply 
+  w-full
+  h-1
+  appearance-none   
+  bg-slate-700
+  cursor-pointer
+  border
+  rounded-full
+}
+
+input[type=range]::-webkit-slider-thumb {
+  @apply 
+  appearance-none 
+  bg-slate-400 
+  h-3 
+  w-3 
+  rounded-full
+  -mt-1
+}

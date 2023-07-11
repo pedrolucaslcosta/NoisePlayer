@@ -40,9 +40,10 @@ function App() {
 
   }, [volume, frequency]);
 
+  Tone.start();
+
   const handlePlayPause = () => {
     if (!isPlaying) {
-      Tone.start();
       noise.start();
     } else {
       noise.stop();
@@ -62,11 +63,13 @@ function App() {
 
   const handleFrequencyChange = (e) => {
     const newFrequency = parseInt(e.target.value);
-    setFrequency(newFrequency);
+    setFrequency(newFrequency);    
     if (filter) {
       filter.frequency.value = newFrequency;
     }
+    handlePlayPause();
   };
+  
 
   return (
     <>
@@ -92,14 +95,12 @@ function App() {
           by <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 transition-all duration-300 hover:underline'>@pedrolucaslco</a>
         </span>
       </div>
+      
       <div className='p-6 bg-slate-800 rounded-lg z-50 flex gap-2 items-center'>  
       
-      <button onClick={handlePlayPause} 
-      className='bg-slate-100 rounded-full p-2 font-medium text-slate-800'>
-        {isPlaying ? <PauseIcon/> : <PlayCircle />}
-      </button>
+      
         
-        <label htmlFor="volume">Volume: {volume*100}%</label>
+      {/* <label htmlFor="volume">Volume: {volume*100}%</label>
       <input
         type="range"
         id="volume"
@@ -120,7 +121,7 @@ function App() {
         value={frequency}
         onChange={handleFrequencyChange}
         
-      />
+      /> */}
       <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={12}> 12   Hz</button>
       <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={40}> 40   Hz</button>
       <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={100}> 100 Hz</button>
@@ -128,6 +129,24 @@ function App() {
       <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={380}> 380 Hz</button>
       <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={600}> 600 Hz</button>
       {/* 90,380, 180 */}
+      </div>
+      <div className='p-6 bg-slate-800 rounded-lg z-50 flex gap-2 items-center'>  
+        <button onClick={handlePlayPause} 
+          className='bg-slate-400 rounded-full p-2 font-medium text-slate-800'>
+          {isPlaying ? <PauseIcon/> : <PlayCircle />}
+        </button>
+      {/* <label htmlFor="volume">Volume: {volume*100}%</label> */}
+        <input
+          type="range"
+          id="volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value={volume}
+          onChange={handleVolumeChange} 
+        />
+
+      
       </div>
     </div>
     </>
