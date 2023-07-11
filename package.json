@@ -1,7 +1,7 @@
 {
-  "name": "noiseplayer",
+  "name": "noise-player",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "color": "^4.2.3",
     "lucide-react": "^0.259.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

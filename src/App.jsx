@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import './App.css'
 import * as Tone from 'tone';
 import { PauseIcon, PlayCircle, WavesIcon } from 'lucide-react';
 
-const App = () => {
+
+function App() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
@@ -113,7 +115,7 @@ const App = () => {
       </div>
     </div>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
