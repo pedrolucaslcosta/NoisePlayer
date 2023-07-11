@@ -67,7 +67,7 @@ function App() {
     if (filter) {
       filter.frequency.value = newFrequency;
     }
-    handlePlayPause();
+    // handlePlayPause();
   };
   
 
