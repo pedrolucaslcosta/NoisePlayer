@@ -67,6 +67,9 @@ function App() {
     if (filter) {
       filter.frequency.value = newFrequency;
     }
+    noise.stop();
+    setIsAnimateMusic(false);
+    setIsPlaying(false);
     // handlePlayPause();
   };
   
