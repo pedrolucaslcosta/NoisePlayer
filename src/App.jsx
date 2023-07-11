@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import * as Tone from 'tone';
-import { Camera, PauseIcon, Play, PlayCircle, WavesIcon } from 'lucide-react';
-import { PlayIcon } from 'lucide-react';
+import { PauseIcon, PlayCircle, WavesIcon } from 'lucide-react';
 
 const App = () => {
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [frequency, setFrequency] = useState(500);
@@ -65,11 +65,7 @@ const App = () => {
 
   return (
     <>
-    
     <div className='bg-slate-900 mouse-effect text-neutral-100 h-screen w-screen flex justify-center items-center flex-col gap-4'> 
-
-
-
       <div className='p-6 bg-slate-800 rounded-lg z-50 flex flex-col gap-2 items-center font-medium'>
         <span className='flex gap-2'>
         <WavesIcon className='hover:text-cyan-500 hover:animate-spin'/> NoisePlayer
