@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import * as Tone from 'tone';
-import { CloudHail, PauseIcon, PlayCircle, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
-
+import { CloudHail, PauseIcon, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
+import NoiseTile from './components/NoiseTile';
 
 function App() {
 
@@ -128,37 +128,15 @@ function App() {
       </div>
       
       {/* FREQUENCY DIV */}
-      <div className='grid grid-cols-3 w-full md:w-auto md:grid-cols-7 lg:grid-cols-7 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
+      <div className='grid grid-cols-2 w-full md:w-auto md:grid-cols-7 lg:grid-cols-7 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
       
-      <button className={frequency == 12 ? 
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handleFrequencyChange} value={12}> 12   Hz</button>
-      <button className={frequency == 40 ? 
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handleFrequencyChange} value={40}> 40   Hz</button>
-      <button className={frequency == 100 ? 
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handleFrequencyChange} value={100}> 100 Hz</button>
-      <button className={frequency == 180 ? 
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handleFrequencyChange} value={180}> 180 Hz</button>
-      <button className={frequency == 380 ? 
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handleFrequencyChange} value={380}> 380 Hz</button>
-      <button className={frequency == 600 ? 
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handleFrequencyChange} value={600}> 600 Hz</button>
-      <button className={isPlayingRain ? 
-      'col-span-3 md:col-span-1 lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'col-span-3 md:col-span-1 lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
-      } onClick={handlePlayRain} value={600}><CloudHail/></button>
-      {/* 90,380, 180 */}
+      <NoiseTile title={'12Hz'} frequency={frequency} freqValue={12} onClick={handleFrequencyChange}/>
+      <NoiseTile title={'40Hz'} frequency={frequency} freqValue={40} onClick={handleFrequencyChange}/>
+      <NoiseTile title={'100Hz'} frequency={frequency} freqValue={100} onClick={handleFrequencyChange}/>
+      <NoiseTile title={'180Hz'} frequency={frequency} freqValue={180} onClick={handleFrequencyChange}/>
+      <NoiseTile title={'380Hz'} frequency={frequency} freqValue={380} onClick={handleFrequencyChange}/>
+      <NoiseTile title={'600Hz'} frequency={frequency} freqValue={600} onClick={handleFrequencyChange}/>
+      <NoiseTile title={<CloudHail/>} frequency={frequency} onClick={handlePlayRain} className='col-span-2'/>
       </div>
 
     <div className='w-full md:w-auto lg:w-auto flex justify-center items-center gap-4'>
