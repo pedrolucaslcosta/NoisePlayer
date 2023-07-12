@@ -136,7 +136,7 @@ function App() {
       <NoiseTile title={'180Hz'} frequency={frequency} freqValue={180} onClick={handleFrequencyChange}/>
       <NoiseTile title={'380Hz'} frequency={frequency} freqValue={380} onClick={handleFrequencyChange}/>
       <NoiseTile title={'600Hz'} frequency={frequency} freqValue={600} onClick={handleFrequencyChange}/>
-      <NoiseTile title={<CloudHail/>} frequency={frequency} onClick={handlePlayRain} className='col-span-2'/>
+      <NoiseTile title={<CloudHail/>} frequency={frequency} onClick={handlePlayRain} className='col-span-2 md:col-span-1'/>
       </div>
 
     <div className='w-full md:w-auto lg:w-auto flex justify-center items-center gap-4'>
