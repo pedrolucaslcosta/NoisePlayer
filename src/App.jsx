@@ -81,7 +81,7 @@ function App() {
   };
 
   const audioRef = React.createRef();
-  const audioUrl = 'public/sounds/rain.ogg';
+  const audioUrl = '/sounds/rain.ogg';
 
   const handlePlayRain = () => {
     const audio = audioRef.current;
