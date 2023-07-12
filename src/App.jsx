@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import * as Tone from 'tone';
-import { PauseIcon, PlayCircle, WavesIcon } from 'lucide-react';
+import { CloudHail, PauseIcon, PlayCircle, Volume, Volume2, WavesIcon } from 'lucide-react';
 
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
   const [noise, setNoise] = useState(null);
   const [filter, setFilter] = useState(null);
   const [gainNode, setGainNode] = useState(null);
+  const [isPlayingRain, setIsPlayingRain] = useState(false);
 
   useEffect(() => {
     
@@ -49,7 +50,6 @@ function App() {
       noise.stop();
     }
     setIsPlaying(!isPlaying);
-    
     setIsAnimateMusic(!isAnimateMusic);
   };
 
@@ -59,6 +59,13 @@ function App() {
     if (gainNode) {
       gainNode.gain.value = newVolume;
     }
+    setIsAnimateMusic(false);
+    setIsPlaying(false);
+    setTimeout('', 1000);
+    setIsAnimateMusic(true);
+    setIsPlaying(true);
+    noise.start();
+
   };
 
   const handleFrequencyChange = (e) => {
@@ -71,6 +78,27 @@ function App() {
     setIsAnimateMusic(false);
     setIsPlaying(false);
     // handlePlayPause();
+  };
+
+  const audioRef = React.createRef();
+  const audioUrl = 'public/sounds/rain.ogg';
+
+  const handlePlayRain = () => {
+    const audio = audioRef.current;
+
+    if (isPlayingRain) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+
+    setIsPlayingRain(!isPlayingRain);
+  }
+
+  const handleEnd = () => {
+    const audio = audioRef.current;
+    audio.currentTime = 0;
+    audio.play();
   };
   
 
@@ -88,9 +116,9 @@ function App() {
       </div>
     </div>
     
-    <div className='bg-slate-900 mouse-effect z-50 text-neutral-100 h-screen w-screen flex justify-center items-center flex-col gap-4'> 
+    <div className='p-4 bg-slate-900 mouse-effect z-50 text-neutral-100 h-screen w-screen flex justify-center items-center flex-col gap-4'> 
      
-      <div className='p-6 bg-slate-800 rounded-lg z-50 flex flex-col gap-2 items-center font-medium'>
+      <div className='w-full md:w-auto lg:w-auto p-6 bg-slate-800 rounded-lg z-50 flex flex-col gap-2 items-center font-medium'>
         <span className='flex gap-2'>
         <WavesIcon className='hover:text-cyan-500 hover:animate-spin'/> NoisePlayer
         </span>
@@ -99,46 +127,51 @@ function App() {
         </span>
       </div>
       
-      <div className='p-6 bg-slate-800 rounded-lg z-50 flex gap-2 items-center'>  
+      {/* FREQUENCY DIV */}
+      <div className=' p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
       
-      
-        
-      {/* <label htmlFor="volume">Volume: {volume*100}%</label>
-      <input
-        type="range"
-        id="volume"
-        min="0"
-        max="1"
-        step="0.01"
-        value={volume}
-        onChange={handleVolumeChange}
-        className='bg-neutral-100'
-      />
-      <label htmlFor="frequency">Frequency: {frequency} Hz</label>
-      <input
-        type="range"
-        id="frequency"
-        min="4"
-        max="1000"
-        step="1"
-        value={frequency}
-        onChange={handleFrequencyChange}
-        
-      /> */}
-      <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={12}> 12   Hz</button>
-      <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={40}> 40   Hz</button>
-      <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={100}> 100 Hz</button>
-      <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={180}> 180 Hz</button>
-      <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={380}> 380 Hz</button>
-      <button className='py-1 px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md' onClick={handleFrequencyChange} value={600}> 600 Hz</button>
+      <button className={frequency == 12 ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handleFrequencyChange} value={12}> 12   Hz</button>
+      <button className={frequency == 40 ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handleFrequencyChange} value={40}> 40   Hz</button>
+      <button className={frequency == 100 ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handleFrequencyChange} value={100}> 100 Hz</button>
+      <button className={frequency == 180 ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handleFrequencyChange} value={180}> 180 Hz</button>
+      <button className={frequency == 380 ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handleFrequencyChange} value={380}> 380 Hz</button>
+      <button className={frequency == 600 ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handleFrequencyChange} value={600}> 600 Hz</button>
+      <button className={isPlayingRain ? 
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      } onClick={handlePlayRain} value={600}><CloudHail/></button>
       {/* 90,380, 180 */}
       </div>
-      <div className='p-6 bg-slate-800 rounded-lg z-50 flex gap-2 items-center'>  
+
+    <div className='w-full md:w-auto lg:w-auto flex justify-center items-center gap-4'>
+
+      <div className='p-6 bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
         <button onClick={handlePlayPause} 
           className='bg-slate-400 rounded-full p-2 font-medium text-slate-800'>
           {isPlaying ? <PauseIcon/> : <PlayCircle />}
         </button>
-      {/* <label htmlFor="volume">Volume: {volume*100}%</label> */}
+      </div>
+
+      <div className='w-full lg:w-auto px-6 h-full bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
+        <Volume/>
         <input
           type="range"
           id="volume"
@@ -148,9 +181,15 @@ function App() {
           value={volume}
           onChange={handleVolumeChange} 
         />
-
-      
-      </div>
+        <Volume2/>
+        {volume*100}%
+      </div>     
+      </div> 
+      <audio
+        src={audioUrl}
+        ref={audioRef}
+        onEnded={handleEnd}
+      />
     </div>
     </>
   )
