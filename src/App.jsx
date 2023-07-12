@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import * as Tone from 'tone';
-import { CloudHail, PauseIcon, PlayCircle, Volume, Volume2, WavesIcon } from 'lucide-react';
+import { CloudHail, PauseIcon, PlayCircle, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
 
 
 function App() {
@@ -116,7 +116,7 @@ function App() {
       </div>
     </div>
     
-    <div className='p-4 bg-slate-900 mouse-effect z-50 text-neutral-100 h-screen w-screen flex justify-center items-center flex-col gap-4'> 
+    <div className='p-4 bg-slate-900 mouse-effect z-50 text-neutral-100 h-screen w-screen flex justify-start md:justify-center items-center flex-col gap-4'> 
      
       <div className='w-full md:w-auto lg:w-auto p-6 bg-slate-800 rounded-lg z-50 flex flex-col gap-2 items-center font-medium'>
         <span className='flex gap-2'>
@@ -128,35 +128,35 @@ function App() {
       </div>
       
       {/* FREQUENCY DIV */}
-      <div className=' p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
+      <div className='grid grid-cols-3 w-full md:w-auto md:grid-cols-7 lg:grid-cols-7 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
       
       <button className={frequency == 12 ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handleFrequencyChange} value={12}> 12   Hz</button>
       <button className={frequency == 40 ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handleFrequencyChange} value={40}> 40   Hz</button>
       <button className={frequency == 100 ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handleFrequencyChange} value={100}> 100 Hz</button>
       <button className={frequency == 180 ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handleFrequencyChange} value={180}> 180 Hz</button>
       <button className={frequency == 380 ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handleFrequencyChange} value={380}> 380 Hz</button>
       <button className={frequency == 600 ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      ' lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handleFrequencyChange} value={600}> 600 Hz</button>
       <button className={isPlayingRain ? 
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
-      'w-full lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
+      'col-span-3 md:col-span-1 lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-600 border border-slate-700 hover:border-slate-600 rounded-md' :
+      'col-span-3 md:col-span-1 lg:w-auto flex items-center justify-center p-4 lg:py-1 lg:px-2 transition-all duration-300 bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-md'
       } onClick={handlePlayRain} value={600}><CloudHail/></button>
       {/* 90,380, 180 */}
       </div>
@@ -166,22 +166,27 @@ function App() {
       <div className='p-6 bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
         <button onClick={handlePlayPause} 
           className='bg-slate-400 rounded-full p-2 font-medium text-slate-800'>
-          {isPlaying ? <PauseIcon/> : <PlayCircle />}
+          {/* {isPlaying ? <PauseIcon/> : <PlayCircle />} */}
+          {isPlaying ? <PauseIcon/> : <PlayIcon className='translate-x-0.5' />}
+
         </button>
       </div>
 
-      <div className='w-full lg:w-auto px-6 h-full bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
-        <Volume/>
+      <div className='w-full lg:w-auto px-6 h-full text-slate-200 bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
+        {(volume == 0) ? <VolumeXIcon size={40} /> : ''}
+        {(volume < 0.5 && volume != 0) ? <Volume1Icon size={40} /> : ''}
+        {(volume > 0.5) ? <Volume2Icon size={40} /> : ''}
+        {/* <Volume2 size={40}/> */}
         <input
           type="range"
           id="volume"
           min="0"
           max="1"
-          step="0.01"
+          step="0.1"
           value={volume}
           onChange={handleVolumeChange} 
         />
-        <Volume2/>
+                
         {volume*100}%
       </div>     
       </div> 
