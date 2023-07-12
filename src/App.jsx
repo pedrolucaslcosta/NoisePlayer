@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import * as Tone from 'tone';
-import { CloudHail, PauseIcon, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
+import { CloudHail, FishIcon, PauseIcon, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
 import NoiseTile from './components/NoiseTile';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
   const [filter, setFilter] = useState(null);
   const [gainNode, setGainNode] = useState(null);
   const [isPlayingRain, setIsPlayingRain] = useState(false);
+  const [isPlayingUnderWater, setIsPlayingUnderWater] = useState(false);
 
   useEffect(() => {
     
@@ -80,11 +81,14 @@ function App() {
     // handlePlayPause();
   };
 
-  const audioRef = React.createRef();
-  const audioUrl = '/sounds/rain.ogg';
+  const audioRefRain = React.createRef();
+  const audioUrlRain = '/sounds/rain.ogg';
+
+  const audioRefUnderWater = React.createRef();
+  const audioUrlUnderWater = '/sounds/underwater.ogg';  
 
   const handlePlayRain = () => {
-    const audio = audioRef.current;
+    const audio = audioRefRain.current;
 
     if (isPlayingRain) {
       audio.pause();
@@ -93,6 +97,18 @@ function App() {
     }
 
     setIsPlayingRain(!isPlayingRain);
+  }
+  
+  const handlePlayUnderWater = () => {
+    const audio = audioRefUnderWater.current;
+
+    if (isPlayingUnderWater) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+
+    setIsPlayingUnderWater(!isPlayingUnderWater);
   }
 
   const handleEnd = () => {
@@ -136,7 +152,8 @@ function App() {
       <NoiseTile title={'180Hz'} frequency={frequency} freqValue={180} onClick={handleFrequencyChange}/>
       <NoiseTile title={'380Hz'} frequency={frequency} freqValue={380} onClick={handleFrequencyChange}/>
       <NoiseTile title={'600Hz'} frequency={frequency} freqValue={600} onClick={handleFrequencyChange}/>
-      <NoiseTile title={<CloudHail/>} frequency={frequency} onClick={handlePlayRain} className='col-span-2 md:col-span-1'/>
+      <NoiseTile title={<CloudHail/>} frequency={frequency} onClick={handlePlayRain}/>
+      <NoiseTile title={<FishIcon />} frequency={frequency} onClick={handlePlayUnderWater}/>
       </div>
 
     <div className='w-full md:w-auto lg:w-auto flex justify-center items-center gap-4'>
@@ -169,8 +186,13 @@ function App() {
       </div>     
       </div> 
       <audio
-        src={audioUrl}
-        ref={audioRef}
+        src={audioUrlRain}
+        ref={audioRefRain}
+        onEnded={handleEnd}
+      />
+      <audio
+        src={audioUrlUnderWater}
+        ref={audioRefUnderWater}
         onEnded={handleEnd}
       />
     </div>
