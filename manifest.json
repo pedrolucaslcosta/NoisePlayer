@@ -1,7 +1,7 @@
 {
     "prefer_related_applications": false,
     "short_name": "NoisePlayer",
-    "name": "NoisePlayer by @pedrolucaslco",
+    "name": "NoisePlayer",
     "icons": [
       {
         "src": "/public/images/NoisePlayer-logo-512.svg",

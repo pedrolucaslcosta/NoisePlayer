@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import * as Tone from 'tone';
-import { ActivityIcon, CloudHail, FishIcon, PauseIcon, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
+import { ActivityIcon, CloudHail, Contrast, FishIcon, Moon, Palette, PauseIcon, PlayIcon, Sun, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
 import NoiseTile from './components/NoiseTile';
 
 function App() {
+
+  const [themeColor, setThemeColor] = useState('light');
+  const [darkMode, setDarkMode] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnimateMusic, setIsAnimateMusic] = useState(false);
@@ -16,7 +19,6 @@ function App() {
   const [isPlayingRain, setIsPlayingRain] = useState(false);
   const [isPlayingUnderWater, setIsPlayingUnderWater] = useState(false);
   
-
   useEffect(() => {
     
     // nodes create
@@ -104,25 +106,48 @@ function App() {
     audio.currentTime = 0;
     audio.play();
   };
-  
 
   return (
-    <>
+    <div id="main" className={darkMode ? 'dark' : ''}>
 
     {/* AUDIO SOURCES */}
     <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEnd} />
     <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEnd} />
 
     {/* APPLICATION */}
-    <div className='flex h-screen w-screen px-6 lg:px-96 md:px-52 py-16 flex-col gap-2 bg-slate-900 mouse-effect z-50 text-slate-300'> 
-      
-      <div className="flex gap-2 md:justify-center">
-        <WavesIcon className='hover:text-cyan-500 hover:animate-spin' size={32}/> 
-        <span className='text-2xl'>NoisePlayer</span>
-      </div>
+    <div className='
+    transition-all duration-700
+    bg-slate-100 text-slate-800 
+    dark:bg-slate-900 dark:text-slate-300 
+    flex h-screen w-screen px-6 lg:px-96 md:px-52 py-16 flex-col gap-2 mouse-effect z-50'> 
+        
+        <div className="flex justify-between">
+          <div className="flex gap-2 md:justify-center">
+            <WavesIcon className='hover:text-cyan-500 hover:animate-spin' size={32}/> 
+            <span className='text-2xl'>NoisePlayer</span>
+          </div>
+          
+          <button onClick={() => setDarkMode(!darkMode)}>
+            {darkMode ? 
+            (
+              <Sun className='cursor-pointer text-slate-700 dark:text-slate-300  transition-all duration-500' />
+            ) : (
+              <Moon className='cursor-pointer text-slate-700 dark:text-slate-300  transition-all duration-500' />
+            )}
+          </button>
+          
+          {/* <div className="flex">
+            <button className='h-8 w-8 rounded-lg bg-orange-700' onClick={handleThemeColor} value={'orange'}></button>
+            <button className='h-8 w-8 rounded-lg bg-slate-700' onClick={handleThemeColor} value={'slate'}></button>
+            <button className='h-8 w-8 rounded-lg bg-red-700' onClick={handleThemeColor} value={'red'}></button>
+            <button className='h-8 w-8 rounded-lg bg-emerald-700' onClick={handleThemeColor} value={'emerald'}></button>
+          </div> */}
+        </div>
+        
 
-      <span className='flex text-sm text-slate-700 md:justify-center'>
-        by <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 transition-all duration-300 hover:underline'>@pedrolucaslco</a>
+      <span className='flex gap-1 text-sm text-slate-700 md:justify-center'>
+        <span>by</span>
+        <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 hover:transition-all hover:duration-300 hover:underline'>@pedrolucaslco</a>
       </span>
 
       <div className='py-4'></div>
@@ -139,10 +164,13 @@ function App() {
         <NoiseTile title={'380Hz'} icon={'Activity'} audio={frequency} freqValue={380} onClick={handleFrequencyChange}/>
         <NoiseTile title={'600Hz'} icon={'Activity'} audio={frequency} freqValue={600} onClick={handleFrequencyChange}/>
         
-        <span className='h-0.5 rounded-full m-2 col-span-3 bg-slate-800'></span>
+        <span className='h-0.5 rounded-full m-2 col-span-3'></span>
         <button 
-            className='flex justify-center items-center gap-1 col-span-3 py-3 bg-slate-700 rounded-2xl font-semibold text-slate-300'
-            onClick={handlePlayPause} 
+            className='
+            bg-slate-300 dark:bg-slate-700
+            text-slate-800 dark:text-slate-300
+            flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold'
+            onClick={handlePlayPause}
         >
           {isPlaying ? <PauseIcon size={20} />: <PlayIcon  size={20}/>}
           {isPlaying ? 'Pause': 'Play'}
@@ -162,7 +190,7 @@ function App() {
       </div>
 
     </div>
-    </>
+    </div>
   )
 }
 
