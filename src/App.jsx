@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import * as Tone from 'tone';
-import { CloudHail, FishIcon, PauseIcon, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
+import { ActivityIcon, CloudHail, FishIcon, PauseIcon, PlayIcon, Volume, Volume1Icon, Volume2, Volume2Icon, VolumeIcon, VolumeX, VolumeXIcon, WavesIcon } from 'lucide-react';
 import NoiseTile from './components/NoiseTile';
 
 function App() {
@@ -108,7 +108,7 @@ function App() {
 
   return (
     <>
-    <div className="h-screen w-screen absolute flex items-center justify-center">
+    {/* <div className="h-screen w-screen absolute flex items-center justify-center">
       <div id="music-animation" className="loader flex items-center justify-center h-3/4 w-full">
         <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
         <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
@@ -118,51 +118,56 @@ function App() {
         <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
         <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
       </div>
-    </div>
+    </div> */}
     
-    <div className='p-4 bg-slate-900 mouse-effect z-50 text-neutral-100 h-screen w-screen flex justify-start md:justify-center items-center flex-col gap-4'> 
-     
-      <div className='w-full md:w-auto lg:w-auto p-6 bg-slate-800 rounded-lg z-50 flex flex-col gap-2 items-center font-medium'>
-        <span className='flex gap-2'>
-        <WavesIcon className='hover:text-cyan-500 hover:animate-spin'/> NoisePlayer
-        </span>
-        <span className='text-sm text-slate-600'>
-          by <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 transition-all duration-300 hover:underline'>@pedrolucaslco</a>
-        </span>
+    <div className='flex h-screen w-screen px-6 lg:px-96 md:px-52 py-16 flex-col gap-2 bg-slate-900 mouse-effect z-50 text-slate-300'> 
+      
+      <div className="flex gap-2 md:justify-center">
+        <WavesIcon className='hover:text-cyan-500 hover:animate-spin' size={32}/> 
+        <span className='text-2xl'>NoisePlayer</span>
       </div>
-      
-      {/* FREQUENCY DIV */}
-      <div className='grid grid-cols-2 w-full md:w-auto md:grid-cols-6 lg:grid-cols-6 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
-      
-        <div className='col-span-2 md:col-span-8 lg:col-span-8 text-center py-4'>Brown Noise</div>
+
+      <span className='flex text-sm text-slate-700 justify-center'>
+        by <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 transition-all duration-300 hover:underline'>@pedrolucaslco</a>
+      </span>
+
+      <div className='py-4'></div>
+
+      <span>Noises</span>
+
+
+      <div className="grid grid-cols-3 gap-2 w-full">
         
-          <NoiseTile title={'12Hz'} audio={frequency} freqValue={12} onClick={handleFrequencyChange}/>
-          <NoiseTile title={'40Hz'} audio={frequency} freqValue={40} onClick={handleFrequencyChange}/>
-          <NoiseTile title={'100Hz'} audio={frequency} freqValue={100} onClick={handleFrequencyChange}/>
-          <NoiseTile title={'180Hz'} audio={frequency} freqValue={180} onClick={handleFrequencyChange}/>
-          <NoiseTile title={'380Hz'} audio={frequency} freqValue={380} onClick={handleFrequencyChange}/>
-          <NoiseTile title={'600Hz'} audio={frequency} freqValue={600} onClick={handleFrequencyChange}/>
-          
-          <button 
-            className='w-full flex justify-center gap-2 mt-4 py-4 col-span-2 md:col-span-6 lg:col-span-6 bg-slate-400 rounded-lg p-2 font-semibold text-slate-800'
+        <NoiseTile title={'12Hz'} icon={'Activity'} audio={frequency} freqValue={12} onClick={handleFrequencyChange}/>
+        <NoiseTile title={'40Hz'} icon={'Activity'} audio={frequency} freqValue={40} onClick={handleFrequencyChange}/>
+        <NoiseTile title={'100Hz'} icon={'Activity'} audio={frequency} freqValue={100} onClick={handleFrequencyChange}/>
+        <NoiseTile title={'180Hz'} icon={'Activity'} audio={frequency} freqValue={180} onClick={handleFrequencyChange}/>
+        <NoiseTile title={'380Hz'} icon={'Activity'} audio={frequency} freqValue={380} onClick={handleFrequencyChange}/>
+        <NoiseTile title={'600Hz'} icon={'Activity'} audio={frequency} freqValue={600} onClick={handleFrequencyChange}/>
+        
+        <span className='h-0.5 rounded-full m-2 col-span-3 bg-slate-800'></span>
+        <button 
+            className='flex justify-center items-center gap-1 col-span-3 py-3 bg-slate-700 rounded-2xl font-semibold text-slate-300'
             onClick={handlePlayPause} 
-          >
-
-            {isPlaying ? <PauseIcon/>: <PlayIcon className='translate-x-0.5' />}
-            {isPlaying ? 'Pause': 'Play'}
-          </button>
+        >
+          {isPlaying ? <PauseIcon size={20} />: <PlayIcon  size={20}/>}
+          {isPlaying ? 'Pause': 'Play'}
+        </button>
 
       </div>
-      <div className='grid grid-cols-2 w-full md:w-auto md:grid-cols-2 lg:grid-cols-2 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
-      
-          <div className='col-span-2 md:col-span-2 lg:col-span-2 text-center py-4'>Sounds</div>
 
-          <NoiseTile title={<CloudHail/>} audio={isPlayingRain} onClick={handlePlayRain}  className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
-          <NoiseTile title={<FishIcon />} audio={isPlayingUnderWater} onClick={handlePlayUnderWater} className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
+      <div className='py-2'></div>
+
+      <span>Sounds</span>
+
+      <div className="grid grid-cols-2 gap-2 w-full">
+
+        <NoiseTile title={'Rain'} icon={'CloudHail'} audio={isPlayingRain} onClick={handlePlayRain}  className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
+        <NoiseTile title={'Underwater'} icon={'Fish'} audio={isPlayingUnderWater} onClick={handlePlayUnderWater} className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
+
       </div>
-      <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEnd} />
-      <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEnd} />
-      </div>
+
+    </div>
     </>
   )
 }
