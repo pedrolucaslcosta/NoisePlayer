@@ -15,21 +15,21 @@ function App() {
   const [gainNode, setGainNode] = useState(null);
   const [isPlayingRain, setIsPlayingRain] = useState(false);
   const [isPlayingUnderWater, setIsPlayingUnderWater] = useState(false);
+  
 
   useEffect(() => {
     
-    // brown noise
+    // nodes create
     const noiseNode = new Tone.Noise('brown');
-
-    // change frequency
     const filterNode = new Tone.Filter(frequency, 'lowpass');
-    noiseNode.connect(filterNode);
-
-    // change volume
     const gain = new Tone.Gain(volume);
+
+    // nodes connect
+    noiseNode.connect(filterNode);
     filterNode.connect(gain);
     gain.toDestination();
 
+    // set states
     setNoise(noiseNode);
     setFilter(filterNode);
     setGainNode(gain);
@@ -60,25 +60,13 @@ function App() {
     if (gainNode) {
       gainNode.gain.value = newVolume;
     }
-    setIsAnimateMusic(false);
-    setIsPlaying(false);
-    setTimeout('', 1000);
-    setIsAnimateMusic(true);
-    setIsPlaying(true);
-    noise.start();
-
   };
 
   const handleFrequencyChange = (e) => {
     const newFrequency = parseInt(e.target.value);
     setFrequency(newFrequency);    
-    if (filter) {
-      filter.frequency.value = newFrequency;
-    }
-    noise.stop();
-    setIsAnimateMusic(false);
     setIsPlaying(false);
-    // handlePlayPause();
+    setIsAnimateMusic(false);    
   };
 
   const audioRefRain = React.createRef();
@@ -144,58 +132,37 @@ function App() {
       </div>
       
       {/* FREQUENCY DIV */}
-      <div className='grid grid-cols-2 w-full md:w-auto md:grid-cols-7 lg:grid-cols-7 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
+      <div className='grid grid-cols-2 w-full md:w-auto md:grid-cols-6 lg:grid-cols-6 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
       
-      <NoiseTile title={'12Hz'} frequency={frequency} freqValue={12} onClick={handleFrequencyChange}/>
-      <NoiseTile title={'40Hz'} frequency={frequency} freqValue={40} onClick={handleFrequencyChange}/>
-      <NoiseTile title={'100Hz'} frequency={frequency} freqValue={100} onClick={handleFrequencyChange}/>
-      <NoiseTile title={'180Hz'} frequency={frequency} freqValue={180} onClick={handleFrequencyChange}/>
-      <NoiseTile title={'380Hz'} frequency={frequency} freqValue={380} onClick={handleFrequencyChange}/>
-      <NoiseTile title={'600Hz'} frequency={frequency} freqValue={600} onClick={handleFrequencyChange}/>
-      <NoiseTile title={<CloudHail/>} frequency={frequency} onClick={handlePlayRain}/>
-      <NoiseTile title={<FishIcon />} frequency={frequency} onClick={handlePlayUnderWater}/>
+        <div className='col-span-2 md:col-span-8 lg:col-span-8 text-center py-4'>Brown Noise</div>
+        
+          <NoiseTile title={'12Hz'} audio={frequency} freqValue={12} onClick={handleFrequencyChange}/>
+          <NoiseTile title={'40Hz'} audio={frequency} freqValue={40} onClick={handleFrequencyChange}/>
+          <NoiseTile title={'100Hz'} audio={frequency} freqValue={100} onClick={handleFrequencyChange}/>
+          <NoiseTile title={'180Hz'} audio={frequency} freqValue={180} onClick={handleFrequencyChange}/>
+          <NoiseTile title={'380Hz'} audio={frequency} freqValue={380} onClick={handleFrequencyChange}/>
+          <NoiseTile title={'600Hz'} audio={frequency} freqValue={600} onClick={handleFrequencyChange}/>
+          
+          <button 
+            className='w-full flex justify-center gap-2 mt-4 py-4 col-span-2 md:col-span-6 lg:col-span-6 bg-slate-400 rounded-lg p-2 font-semibold text-slate-800'
+            onClick={handlePlayPause} 
+          >
+
+            {isPlaying ? <PauseIcon/>: <PlayIcon className='translate-x-0.5' />}
+            {isPlaying ? 'Pause': 'Play'}
+          </button>
+
       </div>
+      <div className='grid grid-cols-2 w-full md:w-auto md:grid-cols-2 lg:grid-cols-2 p-6 bg-slate-800 rounded-lg z-50 flex flex-wrap justify-start gap-2 items-center'>  
+      
+          <div className='col-span-2 md:col-span-2 lg:col-span-2 text-center py-4'>Sounds</div>
 
-    <div className='w-full md:w-auto lg:w-auto flex justify-center items-center gap-4'>
-
-      <div className='p-6 bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
-        <button onClick={handlePlayPause} 
-          className='bg-slate-400 rounded-full p-2 font-medium text-slate-800'>
-          {/* {isPlaying ? <PauseIcon/> : <PlayCircle />} */}
-          {isPlaying ? <PauseIcon/> : <PlayIcon className='translate-x-0.5' />}
-
-        </button>
+          <NoiseTile title={<CloudHail/>} audio={isPlayingRain} onClick={handlePlayRain}  className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
+          <NoiseTile title={<FishIcon />} audio={isPlayingUnderWater} onClick={handlePlayUnderWater} className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
       </div>
-
-      <div className='w-full lg:w-auto px-6 h-full text-slate-200 bg-slate-800 rounded-lg z-50 inline-flex gap-2 items-center'>  
-        {(volume == 0) ? <VolumeXIcon size={40} /> : ''}
-        {(volume < 0.5 && volume != 0) ? <Volume1Icon size={40} /> : ''}
-        {(volume > 0.5) ? <Volume2Icon size={40} /> : ''}
-        {/* <Volume2 size={40}/> */}
-        <input
-          type="range"
-          id="volume"
-          min="0"
-          max="1"
-          step="0.1"
-          value={volume}
-          onChange={handleVolumeChange} 
-        />
-                
-        {volume*100}%
-      </div>     
-      </div> 
-      <audio
-        src={audioUrlRain}
-        ref={audioRefRain}
-        onEnded={handleEnd}
-      />
-      <audio
-        src={audioUrlUnderWater}
-        ref={audioRefUnderWater}
-        onEnded={handleEnd}
-      />
-    </div>
+      <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEnd} />
+      <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEnd} />
+      </div>
     </>
   )
 }
