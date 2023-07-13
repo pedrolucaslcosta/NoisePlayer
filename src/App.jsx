@@ -121,7 +121,7 @@ function App() {
         <span className='text-2xl'>NoisePlayer</span>
       </div>
 
-      <span className='flex text-sm text-slate-700 justify-center'>
+      <span className='flex text-sm text-slate-700 md:justify-center'>
         by <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 transition-all duration-300 hover:underline'>@pedrolucaslco</a>
       </span>
 
