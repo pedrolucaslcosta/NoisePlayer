@@ -108,18 +108,12 @@ function App() {
 
   return (
     <>
-    {/* <div className="h-screen w-screen absolute flex items-center justify-center">
-      <div id="music-animation" className="loader flex items-center justify-center h-3/4 w-full">
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-        <span className={isAnimateMusic ? 'stroke animate-music' : ''}></span>
-      </div>
-    </div> */}
-    
+
+    {/* AUDIO SOURCES */}
+    <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEnd} />
+    <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEnd} />
+
+    {/* APPLICATION */}
     <div className='flex h-screen w-screen px-6 lg:px-96 md:px-52 py-16 flex-col gap-2 bg-slate-900 mouse-effect z-50 text-slate-300'> 
       
       <div className="flex gap-2 md:justify-center">
