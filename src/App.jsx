@@ -7,7 +7,12 @@ import NoiseTile from './components/NoiseTile';
 function App() {
 
   const [themeColor, setThemeColor] = useState('light');
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+
+  useEffect(() => {  
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnimateMusic, setIsAnimateMusic] = useState(false);
@@ -145,7 +150,7 @@ function App() {
         </div>
         
 
-      <span className='flex gap-1 text-sm text-slate-700 md:justify-center'>
+      <span className='flex gap-1 text-sm text-slate-700'>
         <span>by</span>
         <a href="https://pedrolucaslcosta.vercel.app" className='hover:text-cyan-500 hover:transition-all hover:duration-300 hover:underline'>@pedrolucaslco</a>
       </span>

@@ -11,8 +11,8 @@ const NoiseTile = ({ title, icon, onClick, audio, freqValue, className }) => {
 
   return (
       <button className={fullClass} onClick={onClick} value={freqValue}>
-        <span className=''><Icon name={icon} /></span>
-        <span className='text-sm'>
+        <span className='pointer-events-none'><Icon name={icon} /></span>
+        <span className='text-sm pointer-events-none'>
           {title}
         </span>
       </button>
