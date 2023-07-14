@@ -106,8 +106,13 @@ function App() {
     setIsPlayingUnderWater(!isPlayingUnderWater);
   }
 
-  const handleEnd = () => {
-    const audio = audioRef.current;
+  const handleEndRain = () => {
+    const audio = audioRefRain.current;
+    audio.currentTime = 0;
+    audio.play();
+  };
+  const handleEndUnderWater = () => {
+    const audio = audioRefUnderWater.current;
     audio.currentTime = 0;
     audio.play();
   };
@@ -116,8 +121,8 @@ function App() {
     <div id="main" className={darkMode ? 'dark' : ''}>
 
     {/* AUDIO SOURCES */}
-    <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEnd} />
-    <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEnd} />
+    <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEndRain} />
+    <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEndUnderWater} />
 
     {/* APPLICATION */}
     <div className='
@@ -125,7 +130,7 @@ function App() {
     bg-slate-100 text-slate-800 
     dark:bg-slate-900 dark:text-slate-300 
      
-    px-5 sm:px-24 md:px-24 lg:px-48 xl:px-96 2xl:px-[48rem] py-16
+    px-5 sm:px-24 md:px-24 lg:px-48 xl:px-96 py-16
     flex h-screen w-screen flex-col gap-2'> 
         
         <div className="flex justify-between">
@@ -173,10 +178,12 @@ function App() {
         
         <span className='h-0.5 rounded-full m-2 col-span-3'></span>
         <button 
-            className='
-            bg-slate-300 dark:bg-slate-700
-            text-slate-800 dark:text-slate-300
-            flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold'
+          className={
+            isPlaying ? 'bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-300 transition-all duration-500 flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold':
+                        'bg-slate-300 dark:bg-slate-700 text-slate-800 dark:text-slate-300 transition-all duration-500 flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold'
+
+          }
+            
             onClick={handlePlayPause}
         >
           {isPlaying ? <PauseIcon size={20} />: <PlayIcon  size={20}/>}
