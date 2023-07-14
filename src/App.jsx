@@ -124,7 +124,9 @@ function App() {
     transition-all duration-700
     bg-slate-100 text-slate-800 
     dark:bg-slate-900 dark:text-slate-300 
-    flex h-screen w-screen px-6 lg:px-96 md:px-52 py-16 flex-col gap-2 mouse-effect z-50'> 
+     
+    px-5 sm:px-24 md:px-24 lg:px-48 xl:px-96 2xl:px-[48rem] py-16
+    flex h-screen w-screen flex-col gap-2'> 
         
         <div className="flex justify-between">
           <div className="flex gap-2 md:justify-center">
