@@ -179,7 +179,7 @@ function App() {
         <span className='h-0.5 rounded-full m-2 col-span-3'></span>
         <button 
           className={
-            isPlaying ? 'bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-300 transition-all duration-500 flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold':
+            isPlaying ? 'bg-slate-400 dark:bg-slate-500 text-slate-800 dark:text-slate-300 transition-all duration-500 flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold':
                         'bg-slate-300 dark:bg-slate-700 text-slate-800 dark:text-slate-300 transition-all duration-500 flex justify-center items-center gap-1 col-span-3 py-3 rounded-2xl font-semibold'
 
           }
