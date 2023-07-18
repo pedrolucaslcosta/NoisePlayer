@@ -23,6 +23,8 @@ function App() {
   const [gainNode, setGainNode] = useState(null);
   const [isPlayingRain, setIsPlayingRain] = useState(false);
   const [isPlayingUnderWater, setIsPlayingUnderWater] = useState(false);
+  const [isPlayingNature, setIsPlayingNature] = useState(false);
+  const [isPlayingNight, setIsPlayingNight] = useState(false);
   
   useEffect(() => {
     
@@ -81,6 +83,12 @@ function App() {
 
   const audioRefUnderWater = React.createRef();
   const audioUrlUnderWater = '/sounds/underwater.ogg';  
+  
+  const audioRefNature = React.createRef();
+  const audioUrlNature = '/sounds/nature.ogg';  
+  
+  const audioRefNight = React.createRef();
+  const audioUrlNight = '/sounds/night.ogg';  
 
   const handlePlayRain = () => {
     const audio = audioRefRain.current;
@@ -92,6 +100,30 @@ function App() {
     }
 
     setIsPlayingRain(!isPlayingRain);
+  }
+  
+  const handlePlayNight = () => {
+    const audio = audioRefNight.current;
+
+    if (isPlayingNight) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+
+    setIsPlayingNight(!isPlayingNight);
+  }
+ 
+  const handlePlayNature = () => {
+    const audio = audioRefNature.current;
+
+    if (isPlayingNature) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+
+    setIsPlayingNature(!isPlayingNature);
   }
   
   const handlePlayUnderWater = () => {
@@ -116,6 +148,16 @@ function App() {
     audio.currentTime = 0;
     audio.play();
   };
+  const handleEndNature = () => {
+    const audio = audioRefNature.current;
+    audio.currentTime = 0;
+    audio.play();
+  };
+  const handleEndNight = () => {
+    const audio = audioRefNight.current;
+    audio.currentTime = 0;
+    audio.play();
+  };
 
   return (
     <div id="main" className={darkMode ? 'dark' : ''}>
@@ -123,6 +165,8 @@ function App() {
     {/* AUDIO SOURCES */}
     <audio src={audioUrlRain} ref={audioRefRain} onEnded={handleEndRain} />
     <audio src={audioUrlUnderWater} ref={audioRefUnderWater} onEnded={handleEndUnderWater} />
+    <audio src={audioUrlNight} ref={audioRefNight} onEnded={handleEndNight} />
+    <audio src={audioUrlNature} ref={audioRefNature} onEnded={handleEndNature} />
 
     {/* APPLICATION */}
     <div className='
@@ -131,7 +175,7 @@ function App() {
     dark:bg-slate-900 dark:text-slate-300 
      
     px-5 sm:px-24 md:px-24 lg:px-48 xl:px-96 py-16
-    flex h-screen w-screen flex-col gap-2'> 
+    flex h-auto w-screen flex-col gap-2'> 
         
         <div className="flex justify-between">
           <div className="flex gap-2 md:justify-center">
@@ -200,6 +244,8 @@ function App() {
 
         <NoiseTile title={'Rain'} icon={'CloudHail'} audio={isPlayingRain} onClick={handlePlayRain}  className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
         <NoiseTile title={'Underwater'} icon={'Fish'} audio={isPlayingUnderWater} onClick={handlePlayUnderWater} className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
+        <NoiseTile title={'Nature'} icon={'Bird'} audio={isPlayingNature} onClick={handlePlayNature} className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
+        <NoiseTile title={'Night'} icon={'MoonStar'} audio={isPlayingNight} onClick={handlePlayNight} className={'col-span-1 md:col-span-1 lg:col-span-1'}/>
 
       </div>
 
