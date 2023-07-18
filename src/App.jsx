@@ -175,7 +175,7 @@ function App() {
     dark:bg-slate-900 dark:text-slate-300 
      
     px-5 sm:px-24 md:px-24 lg:px-48 xl:px-96 py-16
-    flex h-auto w-screen flex-col gap-2'> 
+    flex h-full 2xl:h-screen w-screen flex-col gap-2'> 
         
         <div className="flex justify-between">
           <div className="flex gap-2 md:justify-center">
