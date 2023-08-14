@@ -6,13 +6,16 @@ import NoiseTile from './components/NoiseTile';
 
 function App() {
 
-  const [themeColor, setThemeColor] = useState('light');
+  const [themeColor, setThemeColor] = useState(localStorage.getItem('themeColor'));
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
 
   useEffect(() => {  
     localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
-
+  
+  useEffect(() => {  
+    localStorage.setItem('themeColor', themeColor);
+  }, [themeColor]);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAnimateMusic, setIsAnimateMusic] = useState(false);
@@ -192,12 +195,13 @@ function App() {
             )}
           </button>
           
-          {/* <div className="flex">
-            <button className='h-8 w-8 rounded-lg bg-orange-700' onClick={handleThemeColor} value={'orange'}></button>
-            <button className='h-8 w-8 rounded-lg bg-slate-700' onClick={handleThemeColor} value={'slate'}></button>
-            <button className='h-8 w-8 rounded-lg bg-red-700' onClick={handleThemeColor} value={'red'}></button>
-            <button className='h-8 w-8 rounded-lg bg-emerald-700' onClick={handleThemeColor} value={'emerald'}></button>
-          </div> */}
+          {/* <div className="flex"> */}
+            {/* <button className='h-8 w-8 rounded-lg bg-slate-800' onClick={() => setThemeColor('dark')}></button> */}
+            {/* <button className='h-8 w-8 rounded-lg bg-black' onClick={() => setThemeColor('amoled')}></button> */}
+            {/* <button className='h-8 w-8 rounded-lg bg-slate-700' onClick={handleThemeColor} value={'slate'}></button> */}
+            {/* <button className='h-8 w-8 rounded-lg bg-red-700' onClick={handleThemeColor} value={'red'}></button> */}
+            {/* <button className='h-8 w-8 rounded-lg bg-emerald-700' onClick={handleThemeColor} value={'emerald'}></button> */}
+          {/* </div> */}
         </div>
         
 
